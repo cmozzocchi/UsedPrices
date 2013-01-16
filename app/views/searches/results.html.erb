@@ -1,0 +1,41 @@
+<h1>Which one of these most closely matches your item?</h1>
+
+<ul>
+	<% @info_array.each do |item| %>
+		<li>
+			<strong><%= item['title'] %></strong></br>
+      <% @itemTitle = item['title'] %>
+			<%= image_tag item['image'] %></br>
+      <% @image = item['image'] %>
+			<p>More details: <%= link_to 'Details', item['details'] %>
+			<p>Reference number: <%= item['id']['Reference'] %></p>
+			<p>ISBN: <%= item['id']['ISBN'] %></p>
+			<p>UPC: <%= item['id']['UPC'] %></p>
+		</li>
+        <% if item['id']['Reference'].present? %>
+          <% @selectedRefID = item['id']['Reference'] %>
+        <% else %>
+          <% @selectedRefID = '' %>
+        <% end %>
+        <% if item['id']['ISBN'].present? %>
+          <% @selectedISBN = item['id']['ISBN'] %>
+        <% else %>
+          <% @selectedISBN = '' %>
+        <% end %>
+        <% if item['id']['UPC'].present? %>
+          <% @selectedUPC = item['id']['UPC'] %>
+        <% else %>
+          <% @selectedUPC = '' %>
+        <% end %>
+      <%= button_to "Get Prices",   method: "put", 
+                                    controller: :searches, action: :update,
+                                    id:               session[:search_id],
+                                    pictureUrl:       @image,
+                                    title:            @itemTitle,
+                                    selectedRefID:    @selectedRefID,
+                                    selectedISBN:     @selectedISBN,
+                                    selectedUPC:      @selectedUPC 
+                                    %>
+	<% end %>
+</ul>
+

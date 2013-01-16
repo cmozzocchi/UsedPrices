@@ -1,0 +1,37 @@
+<h1>Here are your results! </h1>
+
+<h4>Item searched for: <%= @searchedItem.keyword %></h4>
+
+<h5>Here are some stats on sales from the last 30 days:</h5>
+	<p><strong>New condition</strong></p>
+	<ul>
+		<li>Average:  <%= @new_avg_price %></li>
+		<li>Maximum:  <%= @new_max_price %></li>
+		<li>Minimum:  <%= @new_min_price %></li>
+		<li>Median:   <%= @new_median_price%></li>
+	</ul></br>
+	<p><strong>Used condition</strong></p>
+	<ul>
+		<li>Average:  <%= @used_avg_price %></li>
+		<li>Maximum:  <%= @used_max_price %></li>
+		<li>Minimum:  <%= @used_min_price %></li>
+		<li>Median:   <%= @used_median_price%></li>
+	</ul>
+
+<h6>Unhappy with your current item? Check out these listings with ebay</h6>
+	<ul>
+	<% @info_array.each do |item| %>
+		<li>
+			<strong><%= item['title'] %></strong></br>
+			<%= image_tag item['image'] %></br>
+			<p>More details:<%= link_to 'Details', item['url'] %></p>
+			<p>Item condition: <%= item['condition'] %></p>
+			<p>Listing type: <%= item['listingType'] %></p>
+			<p><strong>Current price: </strong><%= item['currentPrice'] %></p>
+			<p>Location zipcode: <%= item['postalCode'] %></p>
+      <% unless item['distance'].blank? %>
+			 <p>Distance from you: <%= item['distance'] %></p>
+      <% end %>
+		</li></br>
+	<% end %>
+	</ul>

@@ -1,0 +1,15 @@
+<h3>Welcome to pricemean!</h3>
+<p>Use the form below to find historical ebay selling prices for various products!</p>
+
+<h5>Launch a new search:</h5>
+  <%= render 'form' %>
+<br />
+
+<h5> Here are the last ten searches </h5>
+<ul class='searches'>
+  <% @searches.each do |search| %>
+    <li><%= search.keyword %></li>
+  <% end %>
+</ul>
+
+
